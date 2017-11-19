@@ -52,4 +52,9 @@ $ret.='</select>';
 		$idDeskriptor	= $this->input->post('idDeskriptor');
 		$this->Master_Model->getElemenContent($idDeskriptor);
 	}
+	function pengguna()
+	{
+		$data = array();
+		$this->template->load('frontend','pengguna',$data);
+	}
 }

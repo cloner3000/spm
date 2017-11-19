@@ -61,7 +61,17 @@ class Config extends CI_Controller {
 			$data['lastUpdated']= $rowContent->lastUpdated;
 			$data['fullname']	= $rowContent->fullname;
 			$data['imgs']		= $this->Config_Model->getImages($shortcutURL);
+			$data['disabled']	= 'readonly';
 		}else{
+			if ($this->input->post('submit')) {		
+				$shortcutURL		= $this->input->post('shortcutURL');
+				$data['title']		= $this->input->post('title');
+				$data['contents']	= $this->input->post('contents');
+				$data['template']	= $this->input->post('template');
+				$data['lastUpdated']= date('Y-m-d H:i:s');
+				$data['idUser']		= $this->session->userdata('idUser');
+	            $this->Config_Model->saveContent($shortcutURL,$data);
+			}
 			$data['shortcutURL']= '';
 			$data['title']		= '';
 			$data['contents']	= '';
@@ -69,6 +79,7 @@ class Config extends CI_Controller {
 			$data['lastUpdated']= '';
 			$data['fullname']	= '';
 			$data['imgs']		= '';
+			$data['disabled']	= '';
 		}
 		$this->template->load('frontend','mgt_contents_view',$data);
 	}

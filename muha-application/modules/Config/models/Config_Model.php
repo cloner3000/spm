@@ -37,5 +37,16 @@ class Config_Model extends CI_Model {
 			return "Belum ada gambar";
 		}
 	}
+	function saveContent($shortcutURL,$data)
+	{
+		$checkAvailable = $this->db->get_where('front_contents',array('shortcutURL'=>$shortcutURL))->num_rows();
+		if ($checkAvailable > 0) {
+			$this->db->where('shortcutURL',$shortcutURL);
+			$q = $this->db->update('front_contents',$data);
+		}else{
+			$data['shortcutURL'] = $shortcutURL;
+			$q = $this->db->insert('front_contents',$data);
+		}
+	}
 }
 ?>
