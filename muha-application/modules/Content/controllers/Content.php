@@ -26,7 +26,11 @@ class Content extends CI_Controller {
 			$this->template->load('frontend',$template,$data);
 		}else{
 			$data['heading']	= 'Halaman tidak ditemukan<br>';
-			$data['message']	= 'Maaf, alamat yang anda tuju salah. Mohon periksa kembali.';
+			if ($this->session->userdata('logged')) {
+				$data['message']	= 'Silahkan tambah data konten dengan alamat <strong><u>'.$shortcutURL.'</u></strong> di menu <a href="'.base_url().'Config/contents">Managemen Konten</a>';
+			}else{
+				$data['message']	= 'Maaf, alamat yang anda tuju belum tersedia.';
+			}
 			$this->template->load('frontend','errors/cli/error_404',$data);
 		}
 	}

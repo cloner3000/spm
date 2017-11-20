@@ -48,5 +48,10 @@ class Config_Model extends CI_Model {
 			$q = $this->db->insert('front_contents',$data);
 		}
 	}
+	function getAllTemplate()
+	{
+		$q = $this->db->get('template');
+		return $q->result_array();
+	}
 }
 ?>

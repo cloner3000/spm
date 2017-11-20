@@ -72,15 +72,16 @@
 		// body...
 	}
 </script>
-<h1>Data Pengguna</h1>
-<p>Data pengguna hanya Administrator yang dapat mengubah atau menambah data</p>
+<h1>Elemen Penilaian</h1>
+<p>Data dalam menu Elemen Penilaian pada sistem ini adalah sebagai <em>main parent</em> atau induk utama dalam struktur pohon Elemen Penilaian</p>
 	
-<table id="dg" class="easyui-datagrid" title="Data Pengguna"
-	url= "<?=base_url()?>Master/getDataPengguna"
-    iconCls="fa fa-user"
+<table id="dg" class="easyui-datagrid" title="Data Elemen"
+	url= "<?=base_url()?>Master/getDataElemen"
+    iconCls="fa fa-sitemap"
     rownumbers="true"
     pagination="true"
     fitColumns="true"
+    nowrap="false"
     pageList= [10,20,30]
     toolbar="#tb-datagrid"
 	data-options="">
@@ -91,14 +92,10 @@
 	method:'post' -->
 <thead>
 	<tr>
-		<th field="identityNo" width="10">No. Identitas</th>
-		<th field="fullname" width="20">Nama Lengkap</th>
-		<th field="email" width="20">Email</th>
-		<th field="address" width="10">Alamat</th>
-		<th field="occupation" width="10">Pekerjaan</th>
-		<th field="gender" width="10">Jenis Kelamin</th>
-		<th field="regdate" width="10">Tanggal Registrasi</th>
-		<th field="status" align="center" width="5" formatter="status">Status</th>
+		<th field="kategori" width="25">Kategori</th>
+		<th field="standar" width="10">Standar</th>
+		<th field="noUrut" width="10">Nomor Urut</th>
+		<th field="elemen" width="55">Elemen</th>
 		<!-- <th data-options="field:'aksi',align:'center'" formatter="action"></th> -->
 	</tr>
 </thead>
@@ -110,88 +107,49 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h1 class="modal-title">Tambah Akun Baru</h1>
+				<h1 class="modal-title">Tambah Elemen</h1>
 			</div>
 			<div class="modal-body">
 				<!-- <h1>Buat akun baru </h1> -->
 				<div id="errMsg" class="bg-danger" style="padding:10px;color:red;display:none;"></div>
 		        <div class="content-form-page">
 		          <div class="row">
+		          	<div class="col-lg-3"></div>
 		            <div class="col-md-6 col-sm-6">
-		              <form class="form-horizontal" role="form" action="<?=base_url()?>Master/register" method="POST" id="fm">
-		                <fieldset>
-		                  <legend>Data Diri</legend>
+		              <form class="form-horizontal" role="form" action="<?=base_url()?>Master/tambahElemen" method="POST" id="fm">
 		                  <div class="form-group">
-		                    <label for="identityNo" class="col-lg-4 control-label">Nomor KTP/SIM/Passport</label>
+		                    <label for="idKategori" class="col-lg-4 control-label">Kategori</label>
 		                    <div class="col-lg-8">
-		                      <input type="text" class="form-control" id="identityNo" name="identityNo" autocomplete="off">
+		                    	<select name="idKategori" class="form-control">
+		                    	<?php
+		                    		$q = $this->db->get('master_kategori')->result_array();
+		                    		foreach ($q as $rowKategori) {
+		                    	?>
+		                    		<option value="<?=$rowKategori['idKategori']?>"><?=$rowKategori['kategori']?></option>
+		                    	<?php
+		                    		}
+		                    	?>
+		                    	</select>
 		                    </div>
 		                  </div>
 		                  <div class="form-group">
-		                    <label for="fullname" class="col-lg-4 control-label">Nama Lengkap</label>
+		                    <label for="standar" class="col-lg-4 control-label">Standar</label>
 		                    <div class="col-lg-8">
-		                      <input type="text" class="form-control" id="fullname" name="fullname" autocomplete="off">
+		                    	<input type="text" class="form-control" id="standar" name="standar" autocomplete="off" placeholder="Isi Kolom Ini Dengan Angka">
 		                    </div>
 		                  </div>
 		                  <div class="form-group">
-		                    <label for="occupation" class="col-lg-4 control-label">Pekerjaan</label>
+		                    <label for="noUrut" class="col-lg-4 control-label">No Urut</label>
 		                    <div class="col-lg-8">
-		                      <input type="text" class="form-control" id="occupation" name="occupation" autocomplete="off">
+		                    	<input type="text" class="form-control" id="noUrut" name="noUrut" autocomplete="off" placeholder="Isi Kolom Ini Dengan Angka">
 		                    </div>
 		                  </div>
 		                  <div class="form-group">
-		                    <label for="email" class="col-lg-4 control-label">Email</label>
+		                    <label for="elemen" class="col-lg-4 control-label">Elemen</label>
 		                    <div class="col-lg-8">
-		                      <input type="text" class="form-control" id="email" name="email" onkeyup="copyEmail()" onchange="validateEmail()" autocomplete="off">
-		                      <small id="registeredEmail" class="require" style="display:none;">Email telah terdaftar. Silahkan <a href="<?=base_url()?>Home/login">masuk</a> jika telah memiliki akun</small>
+		                    	<textarea name="elemen" class="form-control"></textarea>
 		                    </div>
 		                  </div>
-		                  <div class="form-group">
-		                    <label for="address" class="col-lg-4 control-label">Alamat</label>
-		                    <div class="col-lg-8">
-		                      <input type="text" class="form-control" id="address" name="address" autocomplete="off">
-		                    </div>
-		                  </div>
-		                  <div class="form-group">
-		                    <label for="gender" class="col-lg-4 control-label">Jenis Kelamin</label>
-		                    <div class="col-lg-8">
-		                      <select name="gender" class="form-control" autocomplete="off">
-		                        <option value="">- Pilih Jenis Kelamin -</option>
-		                        <?php
-		                          $gender = $this->db->get('master_gender')->result_array();
-		                          foreach ($gender as $rowGender) {
-		                        ?>
-		                          <option value="<?=$rowGender['idGender']?>"><?=$rowGender['gender']?></option>
-		                        <?php
-		                          }
-		                        ?>
-		                      </select>
-		                    </div>
-		                  </div>
-		                </fieldset>
-		            </div>
-		            <div class="col-md-6 col-sm-6">
-		                <fieldset>
-		                  <legend>Data Akun</legend>
-		                  <div class="form-group">
-		                    <label for="secMail" class="col-lg-4 control-label">Username</label>
-		                    <div class="col-lg-8">
-		                      <input type="text" class="form-control" id="secMail" name="username" autocomplete="off">
-		                    </div>
-		                  </div>
-		                  <div class="form-group">
-		                    <label for="password" class="col-lg-4 control-label">Password</label>
-		                    <div class="col-lg-8">
-		                      <input type="password" class="form-control" id="password" name="password" autocomplete="off">
-		                    </div>
-		                  </div>
-		                  <div class="form-group">
-		                    <label for="confirm-password" class="col-lg-4 control-label">Konfirmasi Password</label>
-		                    <div class="col-lg-8">
-		                      <input type="password" class="form-control" id="confirm-password" name="confirm-password" autocomplete="off">
-		                    </div>
-		                  </div>
-		                </fieldset>
 		                <div class="row">
 		                  <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
 		                    <!-- <input type="submit" name="submit" class="btn btn-primary" value="Buat akun"> -->

@@ -61,7 +61,6 @@ class Config extends CI_Controller {
 			$data['lastUpdated']= $rowContent->lastUpdated;
 			$data['fullname']	= $rowContent->fullname;
 			$data['imgs']		= $this->Config_Model->getImages($shortcutURL);
-			$data['disabled']	= 'readonly';
 		}else{
 			if ($this->input->post('submit')) {		
 				$shortcutURL		= $this->input->post('shortcutURL');
@@ -79,8 +78,13 @@ class Config extends CI_Controller {
 			$data['lastUpdated']= '';
 			$data['fullname']	= '';
 			$data['imgs']		= '';
+		}
+		if ($shortcutURL) {
+			$data['disabled']	= 'readonly';
+		}else{
 			$data['disabled']	= '';
 		}
+		$data['getAllTemplate']	= $this->Config_Model->getAllTemplate();
 		$this->template->load('frontend','mgt_contents_view',$data);
 	}
 	function getGambarByIdDeskriptor($shortcutURL)

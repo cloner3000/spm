@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2017-11-17 08:27:01
+Date: 2017-11-20 07:57:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -87,8 +87,8 @@ CREATE TABLE `front_contents` (
 -- ----------------------------
 -- Records of front_contents
 -- ----------------------------
-INSERT INTO `front_contents` VALUES ('home', 'Selamat Datang', 'Dalam rangka membangun budaya mutu di perguruan tinggi melalui implementasi Sistem Penjaminan Mutu Internal (SPMI) sebagaimana diamanatkan pada Bab III Undang-Undang No. 12 Tahun 2012 tentang Pendidikan Tinggi, Direktorat Jenderal Pembelajaran dan Kemahasiswaan melalui Direktorat Penjaminan Mutu, mulai tahun 2016 telah menjalankan berbagai program penguatan SPMI di perguruan tinggi. Agar berbagai program tersebut berjalan dengan kondisi perguruan tinggi dalam mengimplementasikan SPMI, maka perlu dilakukan pemetaan tentang kondisi implementasi SPMI pada saat ini di perguruan tinggi masing-masing.\r\n<br>Sumber : RISTEKDIKTI', '2', '2017-11-16 17:23:18', '1');
-INSERT INTO `front_contents` VALUES ('visi-dan-misi-spm', 'Visi dan Misi SPM', 'Visi:\r\n<br>\r\nMenjadi sebuah lembaga penjaminan mutu yang konsisten dan terpercaya dalam memfasilitasi pelaksanaan siklus sistem penjaminan mutu internal secara sinergis.\r\n<br><br>\r\nMisi :\r\n<br>\r\n1. Membangun sistem dokumen mutu yang sesuai dengan kebutuhan stakeholders,<br>\r\n2. Memfasilitasi Implementasi dokumen mutu,<br>\r\n3. Mendorong peningkatan kinerja akademik dan non akademik dalam melaksanakan penjaminan mutu internal,<br>\r\n4. Meningkatkan budaya mutu organisasi seluruh stakeholders.\r\n', '1', '2017-11-16 10:27:39', '1');
+INSERT INTO `front_contents` VALUES ('home', 'Selamat Datang', 'Dalam rangka membangun budaya mutu di perguruan tinggi melalui implementasi Sistem Penjaminan Mutu Internal (SPMI) sebagaimana diamanatkan pada Bab III Undang-Undang No. 12 Tahun 2012 tentang Pendidikan Tinggi, Direktorat Jenderal Pembelajaran dan Kemahasiswaan melalui Direktorat Penjaminan Mutu, mulai tahun 2016 telah menjalankan berbagai program penguatan SPMI di perguruan tinggi. Agar berbagai program tersebut berjalan dengan kondisi perguruan tinggi dalam mengimplementasikan SPMI, maka perlu dilakukan pemetaan tentang kondisi implementasi SPMI pada saat ini di perguruan tinggi masing-masing.\r\n<br>Sumber : RISTEKDIKTI', '1', '2017-11-16 17:23:18', '1');
+INSERT INTO `front_contents` VALUES ('visi-dan-misi-spm', 'Visi dan Misi SPM', 'Visi:\r\n<br>\r\nMenjadi sebuah lembaga penjaminan mutu yang konsisten dan terpercaya dalam memfasilitasi pelaksanaan siklus sistem penjaminan mutu internal secara sinergis.\r\n<br><br>\r\nMisi :\r\n<br>\r\n1. Membangun sistem dokumen mutu yang sesuai dengan kebutuhan stakeholders,<br>\r\n2. Memfasilitasi Implementasi dokumen mutu,<br>\r\n3. Mendorong peningkatan kinerja akademik dan non akademik dalam melaksanakan penjaminan mutu internal,<br>\r\n4. Meningkatkan budaya mutu organisasi seluruh stakeholders.\r\n', '2', '2017-11-16 10:27:39', '1');
 
 -- ----------------------------
 -- Table structure for `images`
@@ -130,7 +130,7 @@ CREATE TABLE `master_deskriptor` (
   `satu` text NOT NULL,
   `nol` text NOT NULL,
   PRIMARY KEY (`idDeskriptor`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of master_deskriptor
@@ -268,7 +268,7 @@ CREATE TABLE `master_user` (
   `idLevel` int(11) NOT NULL,
   `regdate` date NOT NULL,
   `modifyDate` date NOT NULL,
-  `status` int(1) NOT NULL DEFAULT '0',
+  `status` int(1) NOT NULL DEFAULT '1',
   `statNote` varchar(50) NOT NULL,
   `statUpdate` date NOT NULL,
   PRIMARY KEY (`idUser`)
@@ -293,7 +293,7 @@ CREATE TABLE `template` (
 -- ----------------------------
 -- Records of template
 -- ----------------------------
-INSERT INTO `template` VALUES ('1', 'Konten Standar Dengan Carrousel', '');
-INSERT INTO `template` VALUES ('2', 'Konten Standar Tanpa Carrousel', '');
-INSERT INTO `template` VALUES ('3', 'Konten Dua Kolom Dengan Carrousel', '');
-INSERT INTO `template` VALUES ('4', 'Konten Dua Kolom Tanpa Carrousel', '');
+INSERT INTO `template` VALUES ('1', 'Konten Standar Dengan Carrousel', 'muha-assets/img/template/template1.PNG');
+INSERT INTO `template` VALUES ('2', 'Konten Standar Tanpa Carrousel', 'muha-assets/img/template/template2.PNG');
+INSERT INTO `template` VALUES ('3', 'Konten Dua Kolom Dengan Carrousel', 'muha-assets/img/template/template3.PNG');
+INSERT INTO `template` VALUES ('4', 'Konten Dua Kolom Tanpa Carrousel', 'muha-assets/img/template/template4.PNG');

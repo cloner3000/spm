@@ -1,6 +1,10 @@
 <h1>Manajemen Konten</h1>
-<a href="javascript:void(0)" class="btn btn-danger" onclick="newContent()"><i class="fa fa-plus"></i> Konten Baru</a><br><br>
 <?php
+	if ($disabled) {
+?>
+	<a href="javascript:void(0)" class="btn btn-danger" onclick="newContent()"><i class="fa fa-plus"></i> Konten Baru</a><br><br>
+<?php
+	}
 	$q = $this->db->get('front_contents');
 ?>
 <form action="" method="POST" enctype="multipart/form-data" id="fm-content">
@@ -17,7 +21,7 @@
 				<td>Konten</td>
 				<td>
 					<select class="form-control" onchange="window.location.href = '<?=base_url()?>Config/contents/'+$(this).val()">
-						<option value=""></option>
+						<option value="">Pilih untuk mengubah data</option>
 					<?php
 						foreach ($q->result_array() as $rowContents) {
 							if ($shortcutURL == $rowContents['shortcutURL']) {
@@ -79,7 +83,7 @@
 			<tr>
 				<td>Konten</td>
 				<td>
-					<textarea id="editor" class="form-control"></textarea>
+					<textarea id="contents" name="contents" class="form-control"></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -108,14 +112,24 @@
 	</div>
 </form>
 <div class="modal fade" id="prevTemplateBtn" tabindex="-1" role="prevTemplateBtn" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-full">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 				<h4 class="modal-title">Daftar Template</h4>
 			</div>
 			<div class="modal-body">
-				
+				<?php
+					foreach ($getAllTemplate as $rowPrevTemplate) {
+				?>
+					<div class="col-lg-6">
+						<h3><?=$rowPrevTemplate['title']?></h3>
+						<br>
+						<img src="<?=base_url().$rowPrevTemplate['thumbnail']?>" style="width:100%;border:3px solid gray;">
+					</div>
+				<?php
+					}
+				?>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn default" data-dismiss="modal">Close</button>
