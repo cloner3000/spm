@@ -7,7 +7,7 @@ class Content extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Content_Model');
-		$this->load->model('master/Master_Model');
+		$this->load->model('Master_Model');
 	}
 	public function index()
 	{
