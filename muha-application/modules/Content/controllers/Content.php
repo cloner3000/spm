@@ -58,6 +58,11 @@ class Content extends CI_Controller {
 		$idKategori = $this->input->post('kategori');
 		echo $this->Content_Model->getTotalSkor($idKategori)->totalSkor;
 	}
+	function viewUploadedGambar($id)
+	{
+		$data = array();
+		$this->load->view('viewUploadedGambar',$data);
+	}
 	function uploadGambar()
 	{
 		$config['upload_path'] = 'muha-assets/img/contents/';

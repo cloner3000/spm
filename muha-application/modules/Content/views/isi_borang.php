@@ -156,20 +156,7 @@
 			</div>
 			<div class="modal-body">
 				<div id="msgUplErr" class="panel panel-danger"></div>
-				<div class="portlet box red">
-				    <div class="portlet-title">
-						<div class="caption">
-							<i class="fa fa-list"></i> Gambar Ter-unggah
-						</div>
-				    </div>
-					<div class="portlet-body" id="portletGambar">
-						Tidak ada gambar
-					</div>
-					<form action="<?=base_url()?>Content/uploadGambar" method="POST" enctype="multipart/form-data" id="fm-gambar">
-						<input type="file" name="file">
-					</form>
-					<a href="javascript:uploadGambar()" class="btn btn-warning"><i class="fa fa-upload"></i> Upload</a>
-				</div>
+     			<div id="fileUploadedPage"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn default" data-dismiss="modal">Close</button>
@@ -218,7 +205,8 @@
 		var idDeskriptor	= $('#idDeskriptor').val();
 		if (idDeskriptor) {
 			$.post("<?=base_url()?>Config/getGambarByIdDeskriptor/"+idDeskriptor,{},function(result){
-				$('#portletGambar').html(result);
+				// $('#portletGambar').html(result);
+				$("#fileUploadedPage").load("<?=base_url()?>Content/viewUploadedGambar/"+idDeskriptor);
 			});
 		}else{
 			alert('Elemen belum dipilih');
